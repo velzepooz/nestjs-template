@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { errorDestinationEnum } from '../common/capture-error';
 import { serverSchema } from './server.config';
 import { authTokenSchema } from './auth-token.config';
+import { databaseSchema } from './database.config';
 
 export const envEnum = {
   LOCAL: 'local',
@@ -24,6 +25,7 @@ export type NODE_ENV = (typeof nodeEnvEnum)[keyof typeof nodeEnvEnum];
 export const envVarsSchema = z.object({
   ...serverSchema.shape,
   ...authTokenSchema.shape,
+  ...databaseSchema.shape,
   NODE_ENV: z.nativeEnum(nodeEnvEnum),
   ENV: z.nativeEnum(envEnum),
   SLACK_ERROR_BOT_TOKEN: z.string(),

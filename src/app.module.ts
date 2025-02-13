@@ -9,6 +9,8 @@ import JwtConfig from './config/auth-token.config';
 import { GeneralExceptionFilter } from './app/filters';
 import { GlobalModule } from './common/global.module';
 import { envVarsSchema } from './config/env-vars.config';
+import { DataBaseConfig } from './config/database.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { envVarsSchema } from './config/env-vars.config';
       isGlobal: true,
       validate: (config) => envVarsSchema.parse(config),
     }),
+    TypeOrmModule.forRoot(DataBaseConfig),
     JwtModule.registerAsync({
       global: true,
       useFactory: (configService: ConfigService) => ({

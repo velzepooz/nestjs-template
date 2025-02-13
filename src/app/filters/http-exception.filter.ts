@@ -5,7 +5,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
-import { ApplicationError } from '../../utils/application.error';
+import { ApplicationError } from '../../common/application-error';
 
 /**
  * Filter to handle HTTP exceptions across the application.

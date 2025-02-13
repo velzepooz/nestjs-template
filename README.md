@@ -1,14 +1,12 @@
 # NestJS application template
 
-This is a starter template for NestJS applications.
+This is a starter template for NestJS applications
 
 
 ## Technologies
 
 - [NestJS](https://nestjs.com/)
 - [Fastify](https://www.fastify.io/)
-- [TypeORM](https://typeorm.io/)
-- [PostgreSQL](https://www.postgresql.org/)
 - [Swagger](https://swagger.io/)
 - [Docker](https://www.docker.com/)
 - Jest
@@ -62,18 +60,6 @@ You can find the Swagger documentation at `http://localhost:3000/docs`.
 
 ## Local development
 
-For local development use the following commands:
-
-```bash
-# start postgres db in docker
-docker-compose --env-file .env up -d --build postgres
-```
-
-```bash
-# applies migrations and seeds
-npm run typeorm:migration:run
-```
-
 ```bash
 # start the app in the development mode
 npm run start:dev
@@ -84,34 +70,5 @@ npm run start:dev
 To run tests use the following commands:
 
 ```bash
-# start postgres db in docker
-docker-compose --env-file .env up -d --build postgres
-```
-
-```bash
-# applies migrations
-npm run typeorm:migration:run
-```
-
-```bash
 npm run test
-```
-
-## TypeORM
-
-All entities import to `src/config/database.config.ts` file.
-
-```bash
-# generates file for migration
-npm run typeorm:migration:generate --name=name_of_migration
-```
-
-```bash
-# creates file for migration
-npm run typeorm:migration:create --name=name_of_migration
-```
-
-```bash
-# applies migrations
-npm run typeorm:migration:run
 ```

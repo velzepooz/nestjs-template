@@ -33,3 +33,14 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+.env
+.local.env
+.development.env
+.production.env
+.staging.env
+.test.env
+.dev.env
+.prod.env
+.stage.env
+

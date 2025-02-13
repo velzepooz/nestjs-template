@@ -24,6 +24,7 @@ export type NODE_ENV = (typeof nodeEnvEnum)[keyof typeof nodeEnvEnum];
 export const envVarsSchema = z.object({
   ...serverSchema.shape,
   ...authTokenSchema.shape,
+  DATABASE_URL: z.string(),
   NODE_ENV: z.nativeEnum(nodeEnvEnum),
   ENV: z.nativeEnum(envEnum),
   SLACK_ERROR_BOT_TOKEN: z.string(),

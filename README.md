@@ -7,6 +7,7 @@ This is a starter template for NestJS applications
 
 - [NestJS](https://nestjs.com/)
 - [Fastify](https://www.fastify.io/)
+- [Prisma](https://www.prisma.io/)
 - [Swagger](https://swagger.io/)
 - [Docker](https://www.docker.com/)
 - Jest
@@ -59,6 +60,21 @@ This script will start a postgres container, apply all migrations and seeds, sta
 You can find the Swagger documentation at `http://localhost:3000/docs`.
 
 ## Local development
+
+```bash
+# start needed service for development in docker
+docker compose --env-file .env up -d --build <service_name>
+```
+
+```bash
+# generate prisma client
+npm run prisma:generate
+```
+
+```bash
+# apply migrations
+npm run prisma:migrate:dev
+```
 
 ```bash
 # start the app in the development mode

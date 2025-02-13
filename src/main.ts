@@ -11,7 +11,17 @@ import {
   addMultipart,
   addCookie,
   addHelmet,
+  applyAppUtils,
 } from './app/utils';
+import { ENV_VARS } from './config/env-vars.config';
+
+const appUtils = [
+  addSwagger,
+  addExceptionFilter,
+  addMultipart,
+  addCookie,
+  addHelmet,
+];
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,15 +29,11 @@ async function bootstrap() {
     new FastifyAdapter({ logger: true }),
   );
   const config = app.get<ConfigService>(ConfigService);
-  addSwagger(app);
-  addExceptionFilter(app);
-  await addMultipart(app);
-  await addCookie(app);
-  await addHelmet(app);
+  await applyAppUtils(app, appUtils);
 
   await app.listen(
-    config.get<string>('server.port'),
-    config.get<string>('server.host'),
+    config.get<ENV_VARS['PORT']>('server.port'),
+    config.get<ENV_VARS['HOST']>('server.host'),
   );
 }
 bootstrap();

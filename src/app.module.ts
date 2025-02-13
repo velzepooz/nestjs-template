@@ -8,14 +8,14 @@ import ServerConfig from './config/server.config';
 import JwtConfig from './config/auth-token.config';
 import { GeneralExceptionFilter } from './app/filters';
 import { GlobalModule } from './common/global.module';
-import { envConfigSchema } from './config/env.config';
+import { envVarsSchema } from './config/env-vars.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [ServerConfig, JwtConfig],
       isGlobal: true,
-      validate: (config) => envConfigSchema.parse(config),
+      validate: (config) => envVarsSchema.parse(config),
     }),
     JwtModule.registerAsync({
       global: true,

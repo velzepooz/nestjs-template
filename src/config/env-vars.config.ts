@@ -21,7 +21,7 @@ export const nodeEnvEnum = {
 
 export type NODE_ENV = (typeof nodeEnvEnum)[keyof typeof nodeEnvEnum];
 
-export const envConfigSchema = z.object({
+export const envVarsSchema = z.object({
   ...serverSchema.shape,
   ...authTokenSchema.shape,
   NODE_ENV: z.nativeEnum(nodeEnvEnum),
@@ -33,4 +33,4 @@ export const envConfigSchema = z.object({
   TELEGRAM_ERROR_NOTIFICATION_CHAT_ID: z.string(),
 });
 
-export type ENV_VALUES = z.infer<typeof envConfigSchema>;
+export type ENV_VARS = z.infer<typeof envVarsSchema>;

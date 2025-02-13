@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpRequestUtil } from '../utils/http-request.util';
-import { ENV_VALUES } from '../config/env.config';
+import { ENV_VARS } from '../config/env-vars.config';
 
 export const errorDestinationEnum = {
   SLACK: 'SLACK',
@@ -29,7 +29,7 @@ export class CaptureError {
 
   constructor(private readonly _configService: ConfigService) {
     this._destination =
-      _configService.get<ENV_VALUES['ERROR_DESTINATION']>('ERROR_DESTINATION');
+      _configService.get<ENV_VARS['ERROR_DESTINATION']>('ERROR_DESTINATION');
   }
 
   /**
@@ -51,11 +51,11 @@ export class CaptureError {
       await HttpRequestUtil.makeGetRequest(
         encodeURI(
           `https://api.telegram.org/bot${this._configService.get<
-            ENV_VALUES['TELEGRAM_BOT_TOKEN']
+            ENV_VARS['TELEGRAM_BOT_TOKEN']
           >(
             'TELEGRAM_BOT_TOKEN',
           )}/sendMessage?chat_id=${this._configService.get<
-            ENV_VALUES['TELEGRAM_ERROR_NOTIFICATION_CHAT_ID']
+            ENV_VARS['TELEGRAM_ERROR_NOTIFICATION_CHAT_ID']
           >('TELEGRAM_ERROR_NOTIFICATION_CHAT_ID')}&text=${text}`,
         ),
       );
@@ -74,13 +74,13 @@ export class CaptureError {
         'https://slack.com/api/chat.postMessage',
         {
           channel: this._configService.get<
-            ENV_VALUES['SLACK_ERROR_NOTIFICATION_CHANNEL']
+            ENV_VARS['SLACK_ERROR_NOTIFICATION_CHANNEL']
           >('SLACK_ERROR_NOTIFICATION_CHANNEL'),
           text,
         },
         {
           Authorization: `Bearer ${this._configService.get<
-            ENV_VALUES['SLACK_ERROR_BOT_TOKEN']
+            ENV_VARS['SLACK_ERROR_BOT_TOKEN']
           >('SLACK_ERROR_BOT_TOKEN')}`,
         },
       );

@@ -13,6 +13,7 @@ import {
   addHelmet,
   applyAppUtils,
 } from './app/utils';
+import { ENV_VARS } from './config/env-vars.config';
 
 const appUtils = [
   addSwagger,
@@ -31,8 +32,8 @@ async function bootstrap() {
   await applyAppUtils(app, appUtils);
 
   await app.listen(
-    config.get<string>('server.port'),
-    config.get<string>('server.host'),
+    config.get<ENV_VARS['PORT']>('server.port'),
+    config.get<ENV_VARS['HOST']>('server.host'),
   );
 }
 bootstrap();

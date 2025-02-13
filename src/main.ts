@@ -11,7 +11,16 @@ import {
   addMultipart,
   addCookie,
   addHelmet,
+  applyAppUtils,
 } from './app/utils';
+
+const appUtils = [
+  addSwagger,
+  addExceptionFilter,
+  addMultipart,
+  addCookie,
+  addHelmet,
+];
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,11 +28,7 @@ async function bootstrap() {
     new FastifyAdapter({ logger: true }),
   );
   const config = app.get<ConfigService>(ConfigService);
-  addSwagger(app);
-  addExceptionFilter(app);
-  await addMultipart(app);
-  await addCookie(app);
-  await addHelmet(app);
+  await applyAppUtils(app, appUtils);
 
   await app.listen(
     config.get<string>('server.port'),
